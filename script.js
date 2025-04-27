@@ -1,43 +1,40 @@
-const CORRECT_BIRTHDAY = "2004-04-30";
+// 生日验证功能
+document.getElementById('birthdayForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const birthdayInput = document.getElementById('birthdayInput');
+    const today = new Date();
+    const inputDate = new Date(birthdayInput.value);
+    
+    // 验证日期是否有效
+    if (!birthdayInput.value) {
+        alert('请输入有效的生日日期');
+        return;
+    }
+    
+    // 验证是否为今天
+    if (inputDate.getDate() === today.getDate() && 
+        inputDate.getMonth() === today.getMonth()) {
+        // 跳转到祝福页面
+        window.location.href = 'main.html';
+    } else {
+        alert('今天不是您的生日哦！');
+    }
+});
 
-// 验证生日
-function checkBirthday() {
-  const input = document.getElementById("birthday-input").value;
-  if (input === CORRECT_BIRTHDAY) {
-    window.location.href = "main.html"; // 跳转到星空页
-  } else {
-    document.getElementById("error-message").textContent = "生日不对哦，再试试~";
-  }
+// 祝福页面功能（将在main.html加载后执行）
+function initBlessingPage() {
+    const stars = document.querySelectorAll('.star-btn');
+    
+    stars.forEach(star => {
+        star.addEventListener('click', function() {
+            const blessing = this.getAttribute('data-blessing');
+            alert(blessing);
+        });
+    });
 }
 
-// 星空页逻辑
-if (document.querySelector("body")) {
-  const blessings = [
-    "愿你岁岁平安！",
-    "心想事成，万事如意！",
-    "友谊长存，生日快乐！",
-    // 添加更多祝福语...
-  ];
-
-  // 生成 50 颗随机位置的星星
-  for (let i = 0; i < 50; i++) {
-    const star = document.createElement("div");
-    star.className = "star";
-    star.style.left = `${Math.random() * 100}%`;
-    star.style.top = `${Math.random() * 100}%`;
-    star.onclick = () => showBlessing();
-    document.body.appendChild(star);
-  }
-
-  // 显示随机祝福
-  function showBlessing() {
-    const modal = document.getElementById("modal");
-    const text = document.getElementById("blessing-text");
-    text.textContent = blessings[Math.floor(Math.random() * blessings.length)];
-    modal.classList.remove("hidden");
-  }
-
-  function closeModal() {
-    document.getElementById("modal").classList.add("hidden");
-  }
+// 如果当前是祝福页面，初始化功能
+if (window.location.pathname.includes('main.html')) {
+    document.addEventListener('DOMContentLoaded', initBlessingPage);
 }

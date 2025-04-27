@@ -1,23 +1,77 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
-  <title>Sincere blessing for you</title>
-  <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生日祝福</title>
+    <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .blessing-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 10;
+            color: white;
+            font-family: 'Lato', sans-serif;
+        }
+
+        .stars-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .star-btn {
+            background: url('images/star.png') no-repeat center;
+            background-size: contain;
+            width: 80px;
+            height: 80px;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .star-btn:hover {
+            transform: scale(1.2) rotate(15deg);
+        }
+
+        .back-btn {
+            padding: 10px 20px;
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-  <div id="stars"></div>
-  <div id="stars2"></div>
-  <div id="stars3"></div>
-  
-  <div id="title">
-    <span>生日快乐！</span>
-  </div>
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>
+    
+    <div class="blessing-container">
+        <h1>生日快乐！</h1>
+        <p>点击星星查看祝福</p>
+        
+        <div class="stars-container">
+            <button class="star-btn" data-blessing="愿你健康快乐每一天！"></button>
+            <button class="star-btn" data-blessing="愿你的梦想都能实现！"></button>
+            <button class="star-btn" data-blessing="愿你被幸福围绕！"></button>
+            <button class="star-btn" data-blessing="愿你永远保持微笑！"></button>
+            <button class="star-btn" data-blessing="愿好运常伴你左右！"></button>
+        </div>
+        
+        <button class="back-btn" onclick="window.location.href='index.html'">返回</button>
+    </div>
 
-  <div id="modal" class="hidden">
-    <p id="blessing-text"></p>
-    <button onclick="closeModal()">关闭</button>
-  </div>
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
