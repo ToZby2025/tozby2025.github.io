@@ -2,12 +2,18 @@
 <html>
 <head>
   <title>给你的星空祝福</title>
-  <link rel="stylesheet" href="styles.css">
+  <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="stars-container">
-    <!-- 星星通过 JavaScript 动态生成 -->
+  <div id="stars"></div>
+  <div id="stars2"></div>
+  <div id="stars3"></div>
+  
+  <div id="title">
+    <span>生日快乐！</span>
   </div>
+
   <div id="modal" class="hidden">
     <p id="blessing-text"></p>
     <button onclick="closeModal()">关闭</button>

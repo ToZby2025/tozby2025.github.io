@@ -1,4 +1,3 @@
-// 预设的正确生日（格式: MMDD）
 const CORRECT_BIRTHDAY = "2004-04-30";
 
 // 验证生日
@@ -12,7 +11,7 @@ function checkBirthday() {
 }
 
 // 星空页逻辑
-if (document.querySelector(".stars-container")) {
+if (document.querySelector("body")) {
   const blessings = [
     "愿你岁岁平安！",
     "心想事成，万事如意！",
@@ -27,7 +26,7 @@ if (document.querySelector(".stars-container")) {
     star.style.left = `${Math.random() * 100}%`;
     star.style.top = `${Math.random() * 100}%`;
     star.onclick = () => showBlessing();
-    document.querySelector(".stars-container").appendChild(star);
+    document.body.appendChild(star);
   }
 
   // 显示随机祝福
