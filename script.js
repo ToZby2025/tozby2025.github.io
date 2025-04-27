@@ -1,5 +1,5 @@
 // 预设的正确生日（格式: MMDD）
-const CORRECT_BIRTHDAY = "0430";
+const CORRECT_BIRTHDAY = "2004-04-30";
 
 // 验证生日
 function checkBirthday() {

@@ -1,14 +1,103 @@
 /* 基础样式 */
 body {
-    background: #000;
+    background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
     color: #fff;
     font-family: Arial, sans-serif;
     text-align: center;
     margin: 0;
     overflow: hidden;
+    height: 100vh;
   }
   
-  /* 生日验证页 */
+  /* 星空视差效果 */
+#stars {
+  width: 1px;
+  height: 1px;
+  background: transparent;
+  box-shadow: 1267px 1253px #FFF, 1834px 1934px #FFF, 1785px 1134px #FFF, 1999px 123px #FFF, 234px 456px #FFF;
+  animation: animStar 50s linear infinite;
+  position: absolute;
+}
+
+#stars:after {
+  content: " ";
+  position: absolute;
+  top: 2000px;
+  width: 1px;
+  height: 1px;
+  background: transparent;
+  box-shadow: 1267px 1253px #FFF, 1834px 1934px #FFF, 1785px 1134px #FFF, 1999px 123px #FFF, 234px 456px #FFF;
+}
+
+#stars2 {
+  width: 2px;
+  height: 2px;
+  background: transparent;
+  box-shadow: 567px 253px #FFF, 834px 934px #FFF, 785px 134px #FFF, 999px 23px #FFF, 34px 56px #FFF;
+  animation: animStar 100s linear infinite;
+  position: absolute;
+}
+
+#stars2:after {
+  content: " ";
+  position: absolute;
+  top: 2000px;
+  width: 2px;
+  height: 2px;
+  background: transparent;
+  box-shadow: 567px 253px #FFF, 834px 934px #FFF, 785px 134px #FFF, 999px 23px #FFF, 34px 56px #FFF;
+}
+
+#stars3 {
+  width: 3px;
+  height: 3px;
+  background: transparent;
+  box-shadow: 67px 53px #FFF, 84px 94px #FFF, 85px 14px #FFF, 99px 3px #FFF, 4px 6px #FFF;
+  animation: animStar 150s linear infinite;
+  position: absolute;
+}
+
+#stars3:after {
+  content: " ";
+  position: absolute;
+  top: 2000px;
+  width: 3px;
+  height: 3px;
+  background: transparent;
+  box-shadow: 67px 53px #FFF, 84px 94px #FFF, 85px 14px #FFF, 99px 3px #FFF, 4px 6px #FFF;
+}
+
+#title {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  color: #FFF;
+  text-align: center;
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+  font-size: 50px;
+  letter-spacing: 10px;
+  margin-top: -60px;
+  padding-left: 10px;
+}
+
+#title span {
+  background: -webkit-linear-gradient(white, #38495a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@keyframes animStar {
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY(-2000px);
+  }
+}
+
+/* 生日验证页 */
   .container {
     margin-top: 100px;
   }
