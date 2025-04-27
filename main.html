@@ -19,21 +19,19 @@
         }
 
         .stars-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 30px;
+            position: relative;
+            width: 100%;
+            height: 400px;
             margin: 40px 0;
         }
 
         .star-btn {
             background: url('images/star.png') no-repeat center;
             background-size: contain;
-            width: 80px;
-            height: 80px;
             border: none;
             cursor: pointer;
             transition: transform 0.3s;
+            position: absolute;
         }
 
         .star-btn:hover {
@@ -61,13 +59,7 @@
         <h1>生日快乐！</h1>
         <p>点击星星查看祝福</p>
         
-        <div class="stars-container">
-            <button class="star-btn" data-blessing="愿你健康快乐每一天！"></button>
-            <button class="star-btn" data-blessing="愿你的梦想都能实现！"></button>
-            <button class="star-btn" data-blessing="愿你被幸福围绕！"></button>
-            <button class="star-btn" data-blessing="愿你永远保持微笑！"></button>
-            <button class="star-btn" data-blessing="愿好运常伴你左右！"></button>
-        </div>
+        <div class="stars-container" id="starsContainer"></div>
         
         <button class="back-btn" onclick="window.location.href='index.html'">返回</button>
     </div>
