@@ -4,16 +4,21 @@ const isIndexPage = window.location.pathname.includes('index.html') || window.lo
 
 // 祝福语列表
 const blessings = [
-    "祝你抽卡不歪，十连双黄！",
+    "祝你欧气爆棚，单抽出金，十连满命！",
     "祝你学业顺利，万事顺心！",
     "祝檀健次伴你左右！",
-    "愿你永远保持微笑！",
-    "愿好运与你同在！",
-    "愿你心想事成！",
-    "愿你天天开心！",
-    "愿你前程似锦！",
-    "愿你平安喜乐！",
-    "愿你万事如意！"
+    "祝你吃啥都不胖，熬夜不长痘，钱包永远鼓！",
+    "生日快乐！愿你的快递永远准时，外卖永远热乎！",
+    "祝你每天都有新糖嗑，每天都有新快乐！",
+    "愿你的幸福像你的收藏夹一样，永远塞不满！",
+    "祝你考试全过，论文不秃，作业一键完成！",
+    "愿你的划水效率拉满，100米轻松破个人最佳！",
+    "愿你的生活像盲盒一样，每次打开都是惊喜！",
+    "生日快乐！愿你的WiFi永远满格，奶茶永远加料！",
+    "Another trip around the sun! At this point, you’re basically an astronaut. 🚀",
+    "Birthdays are nature’s way of saying ‘CAKE FIRST, adulting later.’ Enjoy!",
+    "Twinkle, twinkle, little star, how I wonder what you are~",
+    "All the best!"
 ];
 
 // 主页面验证功能
@@ -78,8 +83,8 @@ function generateNonOverlappingPosition(existingStars, size) {
         attempts++;
         
         // 生成随机位置 (留出星星大小的空间)
-        const left = Math.random() * 90 + 5;
-        const top = Math.random() * 90 + 5;
+        const left = Math.random() * 80 + 5;
+        const top = Math.random() * 80 + 5;
         
         // 检查是否在中间文字区域(40-60%)
         const isInCenter = left >= 40 && left <= 60 && top >= 35 && top <= 65;
@@ -113,8 +118,8 @@ function generateNonOverlappingPosition(existingStars, size) {
     // 如果多次尝试后仍找不到合适位置，返回随机位置(避开中间区域)
     let left, top;
     do {
-        left = Math.random() * 90 + 5;
-        top = Math.random() * 90 + 5;
+        left = Math.random() * 80 + 5;
+        top = Math.random() * 80 + 5;
     } while (left >= 40 && left <= 60 && top >= 35 && top <= 65);
     
     return { left, top };
@@ -126,8 +131,9 @@ function createRandomStars() {
     container.innerHTML = '';
     const existingStars = [];
 
-    // 生成10-15个星星
-    const starCount = Math.floor(Math.random() * 6) + 15;
+    // 生成星星 (不超过祝福语数量)
+    const shuffledBlessings = [...blessings].sort(() => Math.random() - 0.5);
+    const starCount = Math.min(Math.floor(Math.random() * 6) + 15, shuffledBlessings.length);
     
     for (let i = 0; i < starCount; i++) {
         const star = document.createElement('button');
@@ -144,23 +150,37 @@ function createRandomStars() {
         star.style.left = `${position.left}%`;
         star.style.top = `${position.top}%`;
         
-        // 随机祝福语
-        const blessingIndex = Math.floor(Math.random() * blessings.length);
-        star.setAttribute('data-blessing', blessings[blessingIndex]);
+        // 分配不重复的祝福语
+        star.setAttribute('data-blessing', shuffledBlessings[i]);
         
-        // 点击事件
+        // 点击事件 - 切换显示/隐藏祝福文字
         star.addEventListener('click', function() {
+            // 检查是否已有祝福文字
+            const existingBlessing = this._blessingElement;
+            
+            if (existingBlessing) {
+                // 如果已有文字，移除它
+                existingBlessing.remove();
+                this._blessingElement = null;
+                return;
+            }
+            
+            // 创建新的祝福文字元素
             const blessingText = this.getAttribute('data-blessing');
             const blessingElement = document.createElement('div');
             blessingElement.className = 'blessing-text';
             blessingElement.textContent = blessingText;
             
-            // 设置与星星相同的位置和大小
+            // 设置位置在星星正下方
+            const starRect = this.getBoundingClientRect();
+            const containerRect = document.getElementById('starsContainer').getBoundingClientRect();
+            
             blessingElement.style.position = 'absolute';
-            blessingElement.style.left = this.style.left;
-            blessingElement.style.top = this.style.top;
-            blessingElement.style.width = this.style.width;
-            blessingElement.style.height = this.style.height;
+            blessingElement.style.left = `${starRect.left - containerRect.left}px`;
+            blessingElement.style.top = `${starRect.bottom - containerRect.top + 5}px`;
+            blessingElement.style.width = 'auto';
+            blessingElement.style.transform = 'translateX(-50%)';
+            blessingElement.style.textAlign = 'center';
             
             // 随机生成好看的颜色
             const colors = [
@@ -171,24 +191,18 @@ function createRandomStars() {
             const randomColor = colors[Math.floor(Math.random() * colors.length)];
             blessingElement.style.color = randomColor;
             
-            // 文字居中显示
-            blessingElement.style.display = 'flex';
-            blessingElement.style.alignItems = 'center';
-            blessingElement.style.justifyContent = 'center';
-            blessingElement.style.fontSize = `${parseInt(this.style.width) * 0.3}px`;
+            // 文字样式
+            blessingElement.style.display = 'block';
+            blessingElement.style.fontSize = `${parseInt(this.style.width) * 0.65}px`;
             blessingElement.style.fontWeight = 'bold';
             blessingElement.style.textShadow = '1px 1px 2px rgba(0,0,0,0.5)';
+            blessingElement.style.whiteSpace = 'nowrap';
+            blessingElement.style.padding = '5px 10px';
+            blessingElement.style.borderRadius = '5px';
+            blessingElement.style.backgroundColor = 'rgba(0,0,0,0.3)';
             
             document.getElementById('starsContainer').appendChild(blessingElement);
-            
-            // 3秒后淡出消失
-            setTimeout(() => {
-                blessingElement.style.transition = 'opacity 1s';
-                blessingElement.style.opacity = '0';
-                setTimeout(() => {
-                    blessingElement.remove();
-                }, 1000);
-            }, 3000);
+            this._blessingElement = blessingElement;
         });
         
         container.appendChild(star);
