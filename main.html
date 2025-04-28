@@ -19,11 +19,13 @@
         }
 
         .stars-container {
-            position: relative;
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: 400px;
-            margin: 40px 0;
-            z-index: 20;
+            height: 100vh;
+            z-index: 5;
+            pointer-events: none;
         }
 
         .star-btn {
@@ -47,7 +49,6 @@
             color: white;
             font-size: 1rem;
             cursor: pointer;
-            margin-top: 20px;
         }
     </style>
 </head>
@@ -56,12 +57,11 @@
     <div id="stars2"></div>
     <div id="stars3"></div>
     
+    <div class="stars-container" id="starsContainer"></div>
+    
     <div class="blessing-container">
-        <h1>生日快乐！</h1>
-        <p>点击星星查看祝福</p>
-        
-        <div class="stars-container" id="starsContainer"></div>
-        
+        <h1>生日快乐</h1>
+        <p>点击星星解锁祝福</p>
         <button class="back-btn" onclick="window.location.href='index.html'">返回</button>
     </div>
 
