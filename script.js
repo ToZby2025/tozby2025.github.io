@@ -38,13 +38,18 @@ if (isIndexPage) {
                     return;
                 }
                 
-                // 验证是否为2004年4月30日
-                if (inputDate.getFullYear() === 2025 && 
-                    inputDate.getMonth() === 3 && // 月份从0开始，4月是3
+                // 验证是否为4月30日
+                if (inputDate.getMonth() === 3 && // 月份从0开始，4月是3
                     inputDate.getDate() === 30) {
                     // 跳转到祝福页面
                     window.location.href = 'main.html';
-                } else {
+                } 
+                else if (
+                inputDate.getMonth() === 6 && // 月份从0开始，4月是3
+                inputDate.getDate() === 14) {
+                    alert('呦还记得哥们生日呢？！')
+                }
+                else {
                     alert('咳咳咳笨笨的！');
                 }
             });
