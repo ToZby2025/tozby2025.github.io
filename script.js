@@ -1,26 +1,6 @@
-// 生日验证功能
-document.getElementById('birthdayForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const birthdayInput = document.getElementById('birthdayInput');
-    const inputDate = new Date(birthdayInput.value);
-    
-    // 验证日期是否有效
-    if (!birthdayInput.value) {
-        alert('请输入有效的生日日期');
-        return;
-    }
-    
-    // 验证是否为2004年4月30日
-    if (inputDate.getFullYear() === 2004 && 
-        inputDate.getMonth() === 3 && // 月份从0开始，4月是3
-        inputDate.getDate() === 30) {
-        // 跳转到祝福页面
-        window.location.href = 'main.html';
-    } else {
-        alert('咳咳咳笨笨的！');
-    }
-});
+// 检查当前页面
+const isMainPage = window.location.pathname.includes('main.html');
+const isIndexPage = window.location.pathname.includes('index.html') || window.location.pathname.endsWith('/');
 
 // 祝福语列表
 const blessings = [
@@ -36,7 +16,38 @@ const blessings = [
     "愿你万事如意！"
 ];
 
-// 生成随机星星
+// 主页面验证功能
+if (isIndexPage) {
+    document.addEventListener('DOMContentLoaded', function() {
+        const birthdayForm = document.getElementById('birthdayForm');
+        if (birthdayForm) {
+            birthdayForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const birthdayInput = document.getElementById('birthdayInput');
+                const inputDate = new Date(birthdayInput.value);
+                
+                // 验证日期是否有效
+                if (!birthdayInput.value) {
+                    alert('请输入有效的生日日期');
+                    return;
+                }
+                
+                // 验证是否为2004年4月30日
+                if (inputDate.getFullYear() === 2004 && 
+                    inputDate.getMonth() === 3 && // 月份从0开始，4月是3
+                    inputDate.getDate() === 30) {
+                    // 跳转到祝福页面
+                    window.location.href = 'main.html';
+                } else {
+                    alert('咳咳咳笨笨的！');
+                }
+            });
+        }
+    });
+}
+
+// 祝福页面功能
 function createRandomStars() {
     const container = document.getElementById('starsContainer');
     container.innerHTML = '';
@@ -77,12 +88,9 @@ function createRandomStars() {
     }
 }
 
-// 祝福页面功能（将在main.html加载后执行）
-function initBlessingPage() {
-    createRandomStars();
-}
-
 // 如果当前是祝福页面，初始化功能
-if (window.location.pathname.includes('main.html')) {
-    document.addEventListener('DOMContentLoaded', initBlessingPage);
+if (isMainPage) {
+    document.addEventListener('DOMContentLoaded', function() {
+        createRandomStars();
+    });
 }
