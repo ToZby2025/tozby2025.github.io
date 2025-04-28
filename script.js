@@ -150,7 +150,45 @@ function createRandomStars() {
         
         // 点击事件
         star.addEventListener('click', function() {
-            alert(this.getAttribute('data-blessing'));
+            const blessingText = this.getAttribute('data-blessing');
+            const blessingElement = document.createElement('div');
+            blessingElement.className = 'blessing-text';
+            blessingElement.textContent = blessingText;
+            
+            // 设置与星星相同的位置和大小
+            blessingElement.style.position = 'absolute';
+            blessingElement.style.left = this.style.left;
+            blessingElement.style.top = this.style.top;
+            blessingElement.style.width = this.style.width;
+            blessingElement.style.height = this.style.height;
+            
+            // 随机生成好看的颜色
+            const colors = [
+                '#FF6B6B', '#4ECDC4', '#45B7D1', '#FFBE0B', 
+                '#FB5607', '#8338EC', '#3A86FF', '#FF006E',
+                '#A0E7E5', '#B4F8C8', '#FBE7C6', '#FFAEBC'
+            ];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            blessingElement.style.color = randomColor;
+            
+            // 文字居中显示
+            blessingElement.style.display = 'flex';
+            blessingElement.style.alignItems = 'center';
+            blessingElement.style.justifyContent = 'center';
+            blessingElement.style.fontSize = `${parseInt(this.style.width) * 0.3}px`;
+            blessingElement.style.fontWeight = 'bold';
+            blessingElement.style.textShadow = '1px 1px 2px rgba(0,0,0,0.5)';
+            
+            document.getElementById('starsContainer').appendChild(blessingElement);
+            
+            // 3秒后淡出消失
+            setTimeout(() => {
+                blessingElement.style.transition = 'opacity 1s';
+                blessingElement.style.opacity = '0';
+                setTimeout(() => {
+                    blessingElement.remove();
+                }, 1000);
+            }, 3000);
         });
         
         container.appendChild(star);
